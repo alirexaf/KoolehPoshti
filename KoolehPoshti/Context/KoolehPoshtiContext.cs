@@ -10,11 +10,11 @@ namespace KoolehPoshti.Context
         {
                 
         }
-        DbSet<Package> Packages { get; set; }
-        DbSet<PackageCategory> PackageCategories { get; set; }
-        DbSet<PackageImage> PackageImages { get; set; }
-        DbSet<Request> Requests { get; set; }
-        DbSet<Requester> Requesters { get; set; }
-        DbSet<Traveler> Travelers { get; set; }
+        public DbSet<Package> Packages { get; set; }
+        public DbSet<PackageCategory> PackageCategories { get; set; }
+        public DbSet<PackageImage> PackageImages { get; set; }
+        public DbSet<Request> Requests { get; set; }
+        public DbSet<Requester> Requesters { get; set; }
+        public DbSet<Traveler> Travelers { get; set; }
     }
 }
