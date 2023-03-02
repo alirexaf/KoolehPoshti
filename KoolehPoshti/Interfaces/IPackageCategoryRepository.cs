@@ -4,7 +4,7 @@ namespace KoolehPoshti.Interfaces
 {
     public interface IPackageCategoryRepository
     {
-        Task<IEnumerable<PackageCategory>> GetPackageCategories();
+        Task<IEnumerable<PackageCategory>> GetAllAsync();
 
     }
 }

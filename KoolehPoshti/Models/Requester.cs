@@ -16,5 +16,6 @@ namespace KoolehPoshti.Models
         public string Email { get; set;}
         public string TelegramId { get; set; }
         public string WhatsAppNumnber { get; set; }
+        public virtual ICollection<Request> Requests { get; set; }
     }
 }

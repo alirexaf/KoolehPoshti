@@ -8,63 +8,39 @@ namespace KoolehPoshti.Repositories
 {
     public class PackageRepository : IPackageRepository
     {
-        private readonly KoolehPoshtiContext _appDbContext;
+        private readonly KoolehPoshtiContext _dbContext;
 
-        public PackageRepository(KoolehPoshtiContext appDbContext)
+        public PackageRepository(KoolehPoshtiContext dbContext)
         {
-
-            _appDbContext = appDbContext;
+            _dbContext = dbContext;
         }
 
-        public async Task<IEnumerable<Package>> GetPackages()
+        public async Task<IEnumerable<Package>> GetAllAsync()
         {
-            return await _appDbContext.Packages.ToListAsync();
+            return await _dbContext.Packages.ToListAsync();
         }
 
-        public async Task<Package> GetPackage(int packageId)
+        public async Task<Package> GetByIdAsync(int id)
         {
-            return await _appDbContext.Packages
-                .FirstOrDefaultAsync(p => p.Id == packageId);
+            return await _dbContext.Packages.FindAsync(id);
         }
 
-        public async Task<Package> AddPackage(Package package)
+        public async Task AddAsync(Package package)
         {
-            var result = await _appDbContext.Packages.AddAsync(package);
-            await _appDbContext.SaveChangesAsync();
-            return result.Entity;
+            await _dbContext.Packages.AddAsync(package);
+            await _dbContext.SaveChangesAsync();
         }
 
-        public async Task<Package> UpdatePackage(Package package)
+        public void Update(Package package)
         {
-            var result = await _appDbContext.Packages
-                .FirstOrDefaultAsync(p => p.Id == package.Id);
-
-            if (result != null)
-            {
-                result.Title = package.Title;
-                result.Weight = package.Weight;
-                result.Dimension = package.Dimension;
-                result.Category = package.Category;
-                result.Images = package.Images;
-                result.IsVisible = package.IsVisible;
-
-                await _appDbContext.SaveChangesAsync();
-
-                return result;
-            }
-
-            return null;
+            _dbContext.Packages.Update(package);
+            _dbContext.SaveChanges();
         }
 
-        public async void DeletePackage(int packageId)
+        public void Delete(Package package)
         {
-            var result = await _appDbContext.Packages
-                .FirstOrDefaultAsync(p => p.Id == packageId);
-            if (result != null)
-            {
-                _appDbContext.Packages.Remove(result);
-                await _appDbContext.SaveChangesAsync();
-            }
+            _dbContext.Packages.Remove(package);
+            _dbContext.SaveChanges();
         }
     }
 }

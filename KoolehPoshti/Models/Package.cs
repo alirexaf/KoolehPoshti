@@ -10,12 +10,13 @@ namespace KoolehPoshti.Models
         public int Id { get; set; }
         [Required]
         public string Title { get; set; }
-        [Required]
-        public List<PackageImage> Images { get; set; }
+        public string Description { get; set; }
         public int Weight { get; set; }
         public string Dimension { get; set; }
         [Required]
-        public PackageCategory Category { get; set; }
+        public virtual PackageCategory Category { get; set; }
+        [Required]
+        public virtual ICollection<PackageImage> Images { get; set; }
         [Required]
         public bool IsVisible { get; set; }
 

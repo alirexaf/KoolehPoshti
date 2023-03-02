@@ -12,8 +12,7 @@ namespace KoolehPoshti.Models
         public string Name { get; set; }
         [Required]
         public string Title { get; set; }
-        [ForeignKey("Id")]
-        public Package Package { get; set; }
+        public virtual ICollection<Package> Packages { get; set; }
 
     }
 }

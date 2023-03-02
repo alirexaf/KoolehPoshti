@@ -4,10 +4,10 @@ namespace KoolehPoshti.Interfaces
 {
     public interface IRequesterRepository
     {
-        Task<IEnumerable<Requester>> GetRequesters();
-        Task<Requester> GetRequester(int requesterId);
-        Task<Requester> AddRequester(Requester requester);
-        Task<Requester> UpdateRequester(Requester requester);
-        void DeleteRequester(int requesterId);
+        Task<IEnumerable<Requester>> GetAllAsync();
+        Task<Requester> GetByIdAsync(int requesterId);
+        Task AddAsync(Requester requester); 
+        void Update(Requester requester); 
+        void Delete(Requester requester);
     }
 }

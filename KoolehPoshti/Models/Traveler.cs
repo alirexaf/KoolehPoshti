@@ -20,6 +20,7 @@ namespace KoolehPoshti.Models
         public string PhoneNumber { get; set; }
         public string TelegramId { get; set; }
         public string WhatsAppNumnber { get; set; }
+        public virtual ICollection<Request> Requests { get; set; }
 
 
 

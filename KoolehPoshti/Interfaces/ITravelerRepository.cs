@@ -4,10 +4,10 @@ namespace KoolehPoshti.Interfaces
 {
     public interface ITravelerRepository
     {
-        Task<IEnumerable<Traveler>> GetTravelerss();
-        Task<Traveler> GetTraveler(int travelerId);
-        Task<Traveler> AddTraveler(Traveler traveler);
-        Task<Traveler> UpdateTraveler(Traveler traveler);
-        void DeleteTraveler(int travelerId);
+        Task<IEnumerable<Traveler>> GetAllAsync();
+        Task<Traveler> GetByIdAsync(int travelerId);
+        Task AddAsync(Traveler traveler);
+        void Update(Traveler traveler);
+        void Delete(Traveler traveler);
     }
 }

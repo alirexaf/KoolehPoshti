@@ -9,16 +9,16 @@ namespace KoolehPoshti.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         [Required]
-        [ForeignKey("Id")]
-        public Traveler Traveler { get; set; }
-        [Required]
-        [ForeignKey("Id")]
-        public Requester Requester { get; set; }
-        [Required]
         public bool IsAccepted { get; set; }
         [Required]
         public DateTime DateCreated { get; set; }
         [Required]
-        public DateTime TimeCreated { get; set; }   
+        public DateTime TimeCreated { get; set; }
+        public int RequesterId { get; set; }
+        public virtual Requester Requester { get; set; }
+        public int TravelerId { get; set; }
+        public virtual Traveler Traveler { get; set; }
+        public int PackageId { get; set; }
+        public virtual Package Package { get; set; }
     }
 }
