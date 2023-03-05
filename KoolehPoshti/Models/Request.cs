@@ -1,24 +1,25 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Diagnostics.CodeAnalysis;
+using System.Text.Json.Serialization;
 
 namespace KoolehPoshti.Models
 {
     public class Request
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
-        [Required]
+        public Guid Id { get; set; }
         public bool IsAccepted { get; set; }
-        [Required]
         public DateTime DateCreated { get; set; }
-        [Required]
         public DateTime TimeCreated { get; set; }
-        public int RequesterId { get; set; }
-        public virtual Requester Requester { get; set; }
-        public int TravelerId { get; set; }
-        public virtual Traveler Traveler { get; set; }
-        public int PackageId { get; set; }
-        public virtual Package Package { get; set; }
+        [ForeignKey("Requester")]
+        public Guid RequesterId { get; set; }
+        public Requester Requester { get; set; }
+        [ForeignKey("Traveler")]
+        public Guid TravelerId { get; set; }
+        public Traveler Traveler { get; set; }
+        [ForeignKey("Package")]
+        public Guid PackageId { get; set; }
+        public Package Package { get; set; }
+
     }
 }

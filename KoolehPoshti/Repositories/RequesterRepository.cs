@@ -20,7 +20,7 @@ namespace KoolehPoshti.Repositories
             return await _dbContext.Requesters.ToListAsync();
         }
 
-        public async Task<Requester> GetByIdAsync(int id)
+        public async Task<Requester> GetByIdAsync(Guid id)
         {
             return await _dbContext.Requesters.FindAsync(id);
         }

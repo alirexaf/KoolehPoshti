@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KoolehPoshti.Migrations
 {
     [DbContext(typeof(KoolehPoshtiContext))]
-    [Migration("20230223161847_Initial Create")]
-    partial class InitialCreate
+    [Migration("20230305115935_First")]
+    partial class First
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,36 +27,50 @@ namespace KoolehPoshti.Migrations
 
             modelBuilder.Entity("KoolehPoshti.Models.Package", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("uniqueidentifier");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Dimension")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsVisible")
                         .HasColumnType("bit");
 
+                    b.Property<Guid>("PackageCategoryId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Weight")
+                    b.Property<int?>("Weight")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("PackageCategoryId");
+
                     b.ToTable("Packages");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("f1617d9d-703a-4a32-bb9a-405ae678050a"),
+                            IsVisible = true,
+                            PackageCategoryId = new Guid("671f7934-60bc-42e0-b407-f68e7fc7a83c"),
+                            Title = "First Package"
+                        });
                 });
 
             modelBuilder.Entity("KoolehPoshti.Models.PackageCategory", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -69,17 +83,28 @@ namespace KoolehPoshti.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("PackageCategories");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("671f7934-60bc-42e0-b407-f68e7fc7a83c"),
+                            Name = "One",
+                            Title = "یک"
+                        });
                 });
 
             modelBuilder.Entity("KoolehPoshti.Models.PackageImage", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<byte[]>("Data")
                         .IsRequired()
                         .HasColumnType("varbinary(max)");
+
+                    b.Property<Guid>("PackageId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -87,14 +112,16 @@ namespace KoolehPoshti.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("PackageId");
+
                     b.ToTable("PackageImages");
                 });
 
             modelBuilder.Entity("KoolehPoshti.Models.Request", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime2");
@@ -102,21 +129,35 @@ namespace KoolehPoshti.Migrations
                     b.Property<bool>("IsAccepted")
                         .HasColumnType("bit");
 
+                    b.Property<Guid>("PackageId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("RequesterId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<DateTime>("TimeCreated")
                         .HasColumnType("datetime2");
 
+                    b.Property<Guid>("TravelerId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("PackageId")
+                        .IsUnique();
+
+                    b.HasIndex("RequesterId");
+
+                    b.HasIndex("TravelerId");
 
                     b.ToTable("Requests");
                 });
 
             modelBuilder.Entity("KoolehPoshti.Models.Requester", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -131,11 +172,9 @@ namespace KoolehPoshti.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("TelegramId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("WhatsAppNumnber")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -145,11 +184,9 @@ namespace KoolehPoshti.Migrations
 
             modelBuilder.Entity("KoolehPoshti.Models.Traveler", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Destination")
                         .IsRequired()
@@ -168,14 +205,12 @@ namespace KoolehPoshti.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("TelegramId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("TravelDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("WhatsAppNumnber")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -183,23 +218,23 @@ namespace KoolehPoshti.Migrations
                     b.ToTable("Travelers");
                 });
 
-            modelBuilder.Entity("KoolehPoshti.Models.PackageCategory", b =>
+            modelBuilder.Entity("KoolehPoshti.Models.Package", b =>
                 {
-                    b.HasOne("KoolehPoshti.Models.Package", "Package")
-                        .WithOne("Category")
-                        .HasForeignKey("KoolehPoshti.Models.PackageCategory", "Id")
-                        .OnDelete(DeleteBehavior.Cascade)
+                    b.HasOne("KoolehPoshti.Models.PackageCategory", "Category")
+                        .WithMany("Packages")
+                        .HasForeignKey("PackageCategoryId")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.Navigation("Package");
+                    b.Navigation("Category");
                 });
 
             modelBuilder.Entity("KoolehPoshti.Models.PackageImage", b =>
                 {
                     b.HasOne("KoolehPoshti.Models.Package", "Package")
                         .WithMany("Images")
-                        .HasForeignKey("Id")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .HasForeignKey("PackageId")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Package");
@@ -207,17 +242,25 @@ namespace KoolehPoshti.Migrations
 
             modelBuilder.Entity("KoolehPoshti.Models.Request", b =>
                 {
+                    b.HasOne("KoolehPoshti.Models.Package", "Package")
+                        .WithOne("Request")
+                        .HasForeignKey("KoolehPoshti.Models.Request", "PackageId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
                     b.HasOne("KoolehPoshti.Models.Requester", "Requester")
-                        .WithMany()
-                        .HasForeignKey("Id")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .WithMany("Requests")
+                        .HasForeignKey("RequesterId")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("KoolehPoshti.Models.Traveler", "Traveler")
-                        .WithMany()
-                        .HasForeignKey("Id")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .WithMany("Requests")
+                        .HasForeignKey("TravelerId")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.Navigation("Package");
 
                     b.Navigation("Requester");
 
@@ -226,10 +269,25 @@ namespace KoolehPoshti.Migrations
 
             modelBuilder.Entity("KoolehPoshti.Models.Package", b =>
                 {
-                    b.Navigation("Category")
-                        .IsRequired();
-
                     b.Navigation("Images");
+
+                    b.Navigation("Request")
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("KoolehPoshti.Models.PackageCategory", b =>
+                {
+                    b.Navigation("Packages");
+                });
+
+            modelBuilder.Entity("KoolehPoshti.Models.Requester", b =>
+                {
+                    b.Navigation("Requests");
+                });
+
+            modelBuilder.Entity("KoolehPoshti.Models.Traveler", b =>
+                {
+                    b.Navigation("Requests");
                 });
 #pragma warning restore 612, 618
         }

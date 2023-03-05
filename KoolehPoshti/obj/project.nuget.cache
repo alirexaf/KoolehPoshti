@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "7VWzFEAHNPANSkGLK31ifkBHPoktvEXtUV66JhUWsyTm2g3zQWVlWtiC5ciNmpygbqhAzerHxjl6Y47AyJM1zA==",
+  "dgSpecHash": "Kh8+w6HqKlfiC+4vGtIGbRKxgBzlCzc84FRDbOy8gezIbSJEtkfxjAUiQlPh5tz7joS4ZIptIV1YTebzwTCSQQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\Alirexa\\Downloads\\Workspace\\Projects\\KoolehPoshti\\KoolehPoshti\\KoolehPoshti\\KoolehPoshti.csproj",
   "expectedPackageFiles": [
@@ -44,6 +44,7 @@
     "C:\\Users\\Alirexa\\.nuget\\packages\\microsoft.win32.registry\\5.0.0\\microsoft.win32.registry.5.0.0.nupkg.sha512",
     "C:\\Users\\Alirexa\\.nuget\\packages\\microsoft.win32.systemevents\\5.0.0\\microsoft.win32.systemevents.5.0.0.nupkg.sha512",
     "C:\\Users\\Alirexa\\.nuget\\packages\\mono.texttemplating\\2.2.1\\mono.texttemplating.2.2.1.nupkg.sha512",
+    "C:\\Users\\Alirexa\\.nuget\\packages\\newtonsoft.json\\13.0.2\\newtonsoft.json.13.0.2.nupkg.sha512",
     "C:\\Users\\Alirexa\\.nuget\\packages\\swashbuckle.aspnetcore\\6.2.3\\swashbuckle.aspnetcore.6.2.3.nupkg.sha512",
     "C:\\Users\\Alirexa\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.2.3\\swashbuckle.aspnetcore.swagger.6.2.3.nupkg.sha512",
     "C:\\Users\\Alirexa\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.2.3\\swashbuckle.aspnetcore.swaggergen.6.2.3.nupkg.sha512",

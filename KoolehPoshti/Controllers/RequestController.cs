@@ -24,7 +24,7 @@ namespace KoolehPoshti.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Request>> GetById(int id)
+        public async Task<ActionResult<Request>> GetById(Guid id)
         {
             var request = await _requestRepository.GetByIdAsync(id);
 
@@ -44,7 +44,7 @@ namespace KoolehPoshti.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id, Request request)
+        public async Task<IActionResult> Update(Guid id, Request request)
         {
             if (id != request.Id)
             {
@@ -56,7 +56,7 @@ namespace KoolehPoshti.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> Delete(Guid id)
         {
             var request = await _requestRepository.GetByIdAsync(id);
 

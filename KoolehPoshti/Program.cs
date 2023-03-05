@@ -1,4 +1,6 @@
 using KoolehPoshti.Context;
+using KoolehPoshti.Interfaces;
+using KoolehPoshti.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -10,8 +12,14 @@ builder.Services.AddDbContext<KoolehPoshtiContext>(options =>
        options.UseSqlServer(builder.Configuration
     .GetConnectionString("KPConnectionString")));
 
+builder.Services.AddScoped<IRequestRepository, RequestRepository>();
+builder.Services.AddScoped<ITravelerRepository, TravelerRepository>();
+builder.Services.AddScoped<IPackageRepository, PackageRepository>();
+builder.Services.AddScoped<IPackageCategoryRepository, PackageCategoryRepository>();
+builder.Services.AddScoped<IPackageImageRepository, PackageImageRepository>();
+builder.Services.AddScoped<IRequesterRepository, RequesterRepository>();
+
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 

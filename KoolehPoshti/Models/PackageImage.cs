@@ -1,18 +1,18 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Diagnostics.CodeAnalysis;
+using System.Text.Json.Serialization;
 
 namespace KoolehPoshti.Models
 {
     public class PackageImage
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]   
-        public int Id { get; set; }
-        [Required]
+        public Guid Id { get; set; }
         public string Title { get; set; }
-        [Required]
+        [AllowNull]
         public byte[] Data { get; set; }
-        public int PackageId { get; set; }
-        public virtual Package Package { get; set; }
+        [ForeignKey("Package")]
+        public Guid PackageId { get; set; }
+        public Package Package { get; set; }
     }
 }

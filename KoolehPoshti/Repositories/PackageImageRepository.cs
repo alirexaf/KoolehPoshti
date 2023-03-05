@@ -19,9 +19,13 @@ namespace KoolehPoshti.Repositories
             return await _dbContext.PackageImages.ToListAsync();
         }
 
-        public async Task<PackageImage> GetByIdAsync(int id)
+        public async Task<PackageImage> GetByIdAsync(Guid id)
         {
             return await _dbContext.PackageImages.FindAsync(id);
+        }
+        public async Task<IEnumerable<PackageImage>> GetByPackageIdAsync(Guid packageId)
+        {
+            return await _dbContext.PackageImages.Where(p => p.PackageId == packageId).ToListAsync();
         }
 
         public async Task AddAsync(PackageImage packageImage)

@@ -1,18 +1,16 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace KoolehPoshti.Models
 {
     public class PackageCategory
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
-        [Required]
+        public Guid Id { get; set; }
         public string Name { get; set; }
-        [Required]
         public string Title { get; set; }
-        public virtual ICollection<Package> Packages { get; set; }
+        [JsonIgnore]
+        public ICollection<Package> Packages { get; set; }
 
     }
 }

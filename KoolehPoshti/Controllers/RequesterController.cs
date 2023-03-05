@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using KoolehPoshti.Interfaces;
+using Microsoft.AspNetCore.Mvc;
+using KoolehPoshti.Models;
+using KoolehPoshti.Repositories;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -9,36 +12,63 @@ namespace KoolehPoshti.Controllers
     [ApiController]
     public class RequesterController : ControllerBase
     {
-        // GET: api/<RequesterController>
+        private readonly IRequesterRepository _requesterRepository;
+        public RequesterController(IRequesterRepository requesterRepository)
+        {
+            _requesterRepository = requesterRepository;
+        }
+
         [HttpGet]
-        public IEnumerable<string> Get()
+        public async Task<ActionResult<IEnumerable<Requester>>> GetAll()
         {
-            return new string[] { "value1", "value2" };
+            var requesters = await _requesterRepository.GetAllAsync();
+            return Ok(requesters);
         }
 
-        // GET api/<RequesterController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public async Task<ActionResult<Requester>> GetById(Guid id)
         {
-            return "value";
+            var requester = await _requesterRepository.GetByIdAsync(id);
+
+            if (requester == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(requester);
         }
 
-        // POST api/<RequesterController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<ActionResult<Requester>> Add(Requester requester)
         {
+            await _requesterRepository.AddAsync(requester);
+            return CreatedAtAction(nameof(GetById), new { id = requester.Id }, requester);
         }
 
-        // PUT api/<RequesterController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public async Task<IActionResult> Update(Guid id, Requester requester)
         {
+            if (id != requester.Id)
+            {
+                return BadRequest();
+            }
+
+            _requesterRepository.Update(requester);
+            return NoContent();
         }
 
-        // DELETE api/<RequesterController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<IActionResult> Delete(Guid id)
         {
+            var requester = await _requesterRepository.GetByIdAsync(id);
+
+            if (requester == null)
+            {
+                return NotFound();
+            }
+
+            _requesterRepository.Delete(requester);
+            return NoContent();
         }
     }
 }

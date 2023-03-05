@@ -20,7 +20,7 @@ namespace KoolehPoshti.Repositories
             return await _dbContext.Packages.ToListAsync();
         }
 
-        public async Task<Package> GetByIdAsync(int id)
+        public async Task<Package> GetByIdAsync(Guid id)
         {
             return await _dbContext.Packages.FindAsync(id);
         }

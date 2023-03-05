@@ -19,7 +19,7 @@ namespace KoolehPoshti.Repositories
             return await _dbContext.Travelers.ToListAsync();
         }
 
-        public async Task<Traveler> GetByIdAsync(int id)
+        public async Task<Traveler> GetByIdAsync(Guid id)
         {
             return await _dbContext.Travelers.FindAsync(id);
         }

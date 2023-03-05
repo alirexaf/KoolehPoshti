@@ -1,26 +1,22 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Diagnostics.CodeAnalysis;
+using System.Text.Json.Serialization;
 
 namespace KoolehPoshti.Models
 {
     public class Traveler
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
-        [Required]
+        public Guid Id { get; set; }
         public string Name { get; set; }
-        [Required]
         public string Source { get; set; }
-        [Required]
         public string Destination { get; set; }
-        [Required]
         public DateTime TravelDate { get; set; }
-        [Required]
         public string PhoneNumber { get; set; }
-        public string TelegramId { get; set; }
-        public string WhatsAppNumnber { get; set; }
-        public virtual ICollection<Request> Requests { get; set; }
+        public string? TelegramId { get; set; }
+        public string? WhatsAppNumnber { get; set; }
+        [JsonIgnore]
+        public ICollection<Request> Requests { get; set; }
 
 
 
