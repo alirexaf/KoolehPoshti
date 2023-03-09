@@ -1,38 +1,22 @@
-# Set the base image
-FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
+#See https://aka.ms/customizecontainer to learn how to customize your debug container and how Visual Studio uses this Dockerfile to build your images for faster debugging.
 
-# Set the working directory
+FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
 WORKDIR /app
-
-# Copy the project file and restore dependencies
-COPY *.csproj .
-RUN dotnet restore
-
-# Copy the application code
-COPY . .
-
-# Build the application
-RUN dotnet build -c Release -o /app/build
-
-# Publish the application
-RUN dotnet publish -c Release -o /app/publish
-
-# Set the runtime image
-FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS runtime
-
-# Set the working directory
-WORKDIR /app
-
-# Copy the published application
-COPY --from=build /app/publish .
-
-# Set the environment variables
-ENV ASPNETCORE_URLS=http://+:80
-ENV ASPNETCORE_ENVIRONMENT=Production
-
-# Expose the port
 EXPOSE 80
+EXPOSE 443
 
-# Start the application
-# ENTRYPOINT ["dotnet", "KoolehPoshti.dll"]
-ENTRYPOINT ["sh", "-c", "dotnet ef database update && dotnet KoolehPoshti.dll"]
+FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
+WORKDIR /src
+COPY ["KoolehPoshti/KoolehPoshti.csproj", "KoolehPoshti/"]
+RUN dotnet restore "KoolehPoshti/KoolehPoshti.csproj"
+COPY . .
+WORKDIR "/src/KoolehPoshti"
+RUN dotnet build "KoolehPoshti.csproj" -c Release -o /app/build
+
+FROM build AS publish
+RUN dotnet publish "KoolehPoshti.csproj" -c Release -o /app/publish /p:UseAppHost=false
+
+FROM base AS final
+WORKDIR /app
+COPY --from=publish /app/publish .
+ENTRYPOINT ["dotnet", "KoolehPoshti.dll"]

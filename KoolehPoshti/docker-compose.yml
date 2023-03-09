@@ -11,7 +11,7 @@ services:
     environment:
       ConnectionStrings__DefaultConnection: "Server=db;Database=kpDb;User=sa;Password=K00l3hPoshti;"
   db:
-    image: mcr.microsoft.com/mssql/server:2019-latest
+    image: mcr.microsoft.com/mssql/server:2022-latest
     environment:
       SA_PASSWORD: "K00l3hPoshti"
       ACCEPT_EULA: "Y"
