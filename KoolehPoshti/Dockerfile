@@ -1,21 +1,14 @@
+# Define the base image
+FROM mcr.microsoft.com/dotnet/aspnet:6.0
 
-FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
+# Set the working directory
 WORKDIR /app
+
+# Copy the application files
+COPY bin/Release/net6.0/publish/ .
+
+# Expose the HTTP port
 EXPOSE 80
-EXPOSE 443
 
-FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
-WORKDIR /src
-COPY ["KoolehPoshti/KoolehPoshti.csproj", "KoolehPoshti/"]
-RUN dotnet restore "KoolehPoshti/KoolehPoshti.csproj"
-COPY . .
-WORKDIR "/src/KoolehPoshti"
-RUN dotnet build "KoolehPoshti.csproj" -c Release -o /app/build
-
-FROM build AS publish
-RUN dotnet publish "KoolehPoshti.csproj" -c Release -o /app/publish /p:UseAppHost=false
-
-FROM base AS final
-WORKDIR /app
-COPY --from=publish /app/publish .
+# Start the application
 ENTRYPOINT ["dotnet", "KoolehPoshti.dll"]
