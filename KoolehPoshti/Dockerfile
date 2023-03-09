@@ -34,4 +34,5 @@ ENV ASPNETCORE_ENVIRONMENT=Production
 EXPOSE 80
 
 # Start the application
-ENTRYPOINT ["dotnet", "KoolehPoshti.dll"]
+# ENTRYPOINT ["dotnet", "KoolehPoshti.dll"]
+ENTRYPOINT ["sh", "-c", "dotnet ef database update && dotnet KoolehPoshti.dll"]
