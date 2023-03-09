@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "Kh8+w6HqKlfiC+4vGtIGbRKxgBzlCzc84FRDbOy8gezIbSJEtkfxjAUiQlPh5tz7joS4ZIptIV1YTebzwTCSQQ==",
+  "dgSpecHash": "6eFTfo86DVWiHLHcAKODQpaFJCRZoBT/oQ8Tu+r4iKYaYEc0So5iuIQCrXho/TEJLGl5fOxzzQpIzGNQ+lqOmA==",
   "success": true,
   "projectFilePath": "C:\\Users\\Alirexa\\Downloads\\Workspace\\Projects\\KoolehPoshti\\KoolehPoshti\\KoolehPoshti\\KoolehPoshti.csproj",
   "expectedPackageFiles": [
@@ -41,6 +41,7 @@
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\microsoft.netcore.targets\\1.1.0\\microsoft.netcore.targets.1.1.0.nupkg.sha512",
     "C:\\Users\\Alirexa\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
     "C:\\Users\\Alirexa\\.nuget\\packages\\microsoft.sqlserver.server\\1.0.0\\microsoft.sqlserver.server.1.0.0.nupkg.sha512",
+    "C:\\Users\\Alirexa\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.17.2\\microsoft.visualstudio.azure.containers.tools.targets.1.17.2.nupkg.sha512",
     "C:\\Users\\Alirexa\\.nuget\\packages\\microsoft.win32.registry\\5.0.0\\microsoft.win32.registry.5.0.0.nupkg.sha512",
     "C:\\Users\\Alirexa\\.nuget\\packages\\microsoft.win32.systemevents\\5.0.0\\microsoft.win32.systemevents.5.0.0.nupkg.sha512",
     "C:\\Users\\Alirexa\\.nuget\\packages\\mono.texttemplating\\2.2.1\\mono.texttemplating.2.2.1.nupkg.sha512",
