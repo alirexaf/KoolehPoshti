@@ -12,6 +12,8 @@ services:
       - ./data:/var/opt/mssql/data
       - ./scripts:/scripts
     command: /bin/bash -c "/opt/mssql/bin/sqlservr & sleep infinity"
+    networks:
+      - app-network
 
   api:
     build:
@@ -24,6 +26,8 @@ services:
     depends_on:
       - db
     restart: always
+    networks:
+      - app-network
 
   nginx:
     image: nginx
@@ -35,3 +39,7 @@ services:
     depends_on:
       - api
     restart: always
+    networks:
+      - app-network
+networks:
+  app-network:
