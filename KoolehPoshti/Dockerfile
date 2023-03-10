@@ -1,13 +1,20 @@
-FROM mcr.microsoft.com/dotnet
+FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build-env
 
-COPY . /app
-
+# Set the working directory
 WORKDIR /app
 
-RUN ["dotnet", "restore"]
+# Copy the project file and restore dependencies
+COPY *.csproj ./
+RUN dotnet restore
 
-RUN ["dotnet", "build"]
+# Copy the rest of the code and build the app
+COPY . ./
+RUN dotnet publish -c Release -o out
 
-EXPOSE 5000/tcp
+# Build the runtime image
+FROM mcr.microsoft.com/dotnet/aspnet:6.0
+WORKDIR /app
+COPY --from=build-env /app/out .
 
-ENTRYPOINT ["dotnet", "run","--server.urls", "http://0.0.0.0:5000"]
+# Set the entry point
+CMD ["dotnet", "KoolehPoshti.dll"]
