@@ -56,9 +56,9 @@ namespace KoolehPoshti.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("f1617d9d-703a-4a32-bb9a-405ae678050a"),
+                            Id = new Guid("78318166-6992-43c7-9cd7-15ac39229391"),
                             IsVisible = true,
-                            PackageCategoryId = new Guid("671f7934-60bc-42e0-b407-f68e7fc7a83c"),
+                            PackageCategoryId = new Guid("31679b51-c5a6-4691-b8eb-d59ad5bd7bd9"),
                             Title = "First Package"
                         });
                 });
@@ -84,7 +84,7 @@ namespace KoolehPoshti.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("671f7934-60bc-42e0-b407-f68e7fc7a83c"),
+                            Id = new Guid("31679b51-c5a6-4691-b8eb-d59ad5bd7bd9"),
                             Name = "One",
                             Title = "یک"
                         });
